@@ -1,5 +1,5 @@
 #define pinSom 7
-#define pinRele1 2
+#define pinRele1 4
 #define pinRele2 3
 #define tempoMaximoDeUmaPalma  150
 #define tempoMaximoEntrePalmas 500
@@ -12,7 +12,7 @@ void executarAcao();
 
 void setup() {
   pinMode(pinSom, INPUT);
-  pinMode(pinRele1, OUTPUT);
+  pinMode(4, OUTPUT);
   pinMode(pinRele2, OUTPUT);
 }
 
@@ -30,6 +30,7 @@ void loop() {
   }
 
   if ( (contaPalmas != 0) && ((millis() - tempoEsperaEntrePalmas) > 500) ) {
+     digitalWrite(4, HIGH);
      executarAcao();
      contaPalmas = 0;
      tempoEsperaEntrePalmas = millis();
@@ -43,6 +44,7 @@ void executarAcao() {
   switch (contaPalmas) {
     case 2: 
        digitalWrite(pinRele1, !digitalRead(pinRele1));
+       delay(500);
        break;
     case 3:
        digitalWrite(pinRele2, !digitalRead(pinRele2));
@@ -52,4 +54,3 @@ void executarAcao() {
        break;
   }
 }
-
